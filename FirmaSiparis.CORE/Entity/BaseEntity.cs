@@ -12,7 +12,7 @@ namespace FirmaSiparis.CORE.Entity
         public BaseEntity()
         {
             Status = Status.None;
-            CreatedDate = DateTime.Now.ToUniversalTime();
+            CreatedDate = DateTime.Now;
         }
         public Guid Id { get; set; }
         public Status Status { get; set; }
