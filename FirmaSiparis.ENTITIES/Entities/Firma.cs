@@ -11,8 +11,8 @@ namespace FirmaSiparis.ENTITIES.Entities
     {
         public string? FirmaAdi { get; set; }
         public bool OnayDurumu { get; set; }
-        public DateTime SiparisIzinBasSaati { get; set; }
-        public DateTime SiparisIzinBitisSaati { get; set; }
+        public TimeSpan SiparisIzinBasSaati { get; set; }
+        public TimeSpan SiparisIzinBitisSaati { get; set; }
         public virtual List<Urun>? Urunler { get; set; }
         public virtual List<Siparis>? Siparisler { get; set; }
     }
