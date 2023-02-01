@@ -60,13 +60,13 @@ namespace FirmaSiparis.API.Controllers
             }
         }
         [HttpPut("Update")]
-        public IActionResult Update(FirmaVM firmaVM)
+        public IActionResult Update(UpdateFirmaVM updateFirmaVM)
         {
-            Firma firma = new Firma();
-            firma.FirmaAdi = firmaVM.FirmaAdi;
-            firma.OnayDurumu = firmaVM.OnayDurumu;
-            firma.SiparisIzinBasSaati = TimeSpan.Parse(firmaVM.SiparisIzinBasSaati ?? "10:00");
-            firma.SiparisIzinBitisSaati = TimeSpan.Parse(firmaVM.SiparisIzinBitisSaati ?? "22:00");
+            Firma firma = _firmaRepository.GetById(updateFirmaVM.Id);
+            firma.FirmaAdi = updateFirmaVM.FirmaAdi;
+            firma.OnayDurumu = updateFirmaVM.OnayDurumu;
+            firma.SiparisIzinBasSaati = TimeSpan.Parse(updateFirmaVM.SiparisIzinBasSaati ?? "10:00");
+            firma.SiparisIzinBitisSaati = TimeSpan.Parse(updateFirmaVM.SiparisIzinBitisSaati ?? "22:00");
             try
             {
                 _firmaRepository.Update(firma);
