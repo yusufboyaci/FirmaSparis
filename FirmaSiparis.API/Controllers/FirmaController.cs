@@ -1,4 +1,5 @@
-﻿using FirmaSiparis.DATAACCESS.Context;
+﻿using FirmaSiparis.API.ViewModels;
+using FirmaSiparis.DATAACCESS.Context;
 using FirmaSiparis.DATAACCESS.Repositories.Concrete;
 using FirmaSiparis.ENTITIES.Entities;
 using Microsoft.AspNetCore.Http;
@@ -23,9 +24,10 @@ namespace FirmaSiparis.API.Controllers
                 List<Firma> firmalar = _firmaRepository.GetActives();
                 return Ok(firmalar);
             }
-            catch 
+            catch(Exception ex) 
             {
-                return BadRequest("Sistem de hata meydana geldi");
+              //  return BadRequest("Sistem de hata meydana geldi");
+                return BadRequest(ex.Message);
             }
         }
         [HttpGet("Get")]
@@ -41,8 +43,13 @@ namespace FirmaSiparis.API.Controllers
             }
         }
         [HttpPost("Add")]
-        public IActionResult Add(Firma firma)
+        public IActionResult Add(FirmaVM firmaVM)
         {
+            Firma firma = new Firma();
+            firma.FirmaAdi = firmaVM.FirmaAdi;
+            firma.OnayDurumu = firmaVM.OnayDurumu;
+            firma.SiparisIzinBasSaati = TimeSpan.Parse(firmaVM.SiparisIzinBasSaati ?? "10:00");
+            firma.SiparisIzinBitisSaati = TimeSpan.Parse(firmaVM.SiparisIzinBitisSaati ?? "22:00");
             try
             {
                 _firmaRepository.Add(firma);
