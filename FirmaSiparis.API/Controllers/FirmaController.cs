@@ -72,12 +72,12 @@ namespace FirmaSiparis.API.Controllers
                 return BadRequest("Sistem de hata meydana geldi");
             }
         }
-        [HttpDelete("Delete/{id}")]
-        public IActionResult Delete(Guid id)
+        [HttpDelete("Delete")]
+        public IActionResult Delete(Firma firma)
         {
             try
             {
-                _firmaRepository.Remove(id);
+                _firmaRepository.Remove(firma);
                 return NoContent();
             }
             catch {
