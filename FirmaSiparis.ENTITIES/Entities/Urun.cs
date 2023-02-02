@@ -10,7 +10,7 @@ namespace FirmaSiparis.ENTITIES.Entities
     public class Urun : BaseEntity
     {
         public Guid FirmaId { get; set; }//FK
-        public string UrunAdi { get; set; }
+        public string? UrunAdi { get; set; }
         public int Stok { get; set; } = 0;
         public decimal Fiyat { get; set; } = 0.00m;
         public virtual Firma? Firma { get; set; }
