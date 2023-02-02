@@ -24,7 +24,7 @@ namespace FirmaSiparis.API.Controllers
                 {
                     if (siparis.Firma.OnayDurumu == true)
                     {
-                        if (TimeSpan.Compare(siparis.Firma.SiparisIzinBasSaati, TimeSpan.Parse("8:30")) == -1 && TimeSpan.Compare(siparis.Firma.SiparisIzinBitisSaati, TimeSpan.Parse("11:00")) == 1)
+                        if (TimeSpan.Compare(TimeSpan.Parse("8:30"), siparis.Firma.SiparisIzinBasSaati) == -1 && TimeSpan.Compare(TimeSpan.Parse("11:00"), siparis.Firma.SiparisIzinBitisSaati) == 1)
                         {
                             _siparisRepository.Add(siparis);
                             return NoContent();
