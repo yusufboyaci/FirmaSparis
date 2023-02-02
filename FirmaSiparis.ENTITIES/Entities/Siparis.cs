@@ -11,7 +11,7 @@ namespace FirmaSiparis.ENTITIES.Entities
     {
         public Guid FirmaId { get; set; }//FK
         public Guid UrunId { get; set; }//FK
-        public string SiparisiVereninAdi { get; set; }
+        public string? SiparisiVereninAdi { get; set; }
         public DateTime SiparisTarihi { get; set; }
         public virtual Urun? Urun { get; set; }
         public virtual Firma? Firma { get; set; }
