@@ -24,10 +24,9 @@ namespace FirmaSiparis.API.Controllers
                 List<Firma> firmalar = _firmaRepository.GetActives();
                 return Ok(firmalar);
             }
-            catch(Exception ex) 
+            catch 
             {
-              //  return BadRequest("Sistem de hata meydana geldi");
-                return BadRequest(ex.Message);
+                return BadRequest("Sistem de hata meydana geldi");
             }
         }
         [HttpGet("Get")]

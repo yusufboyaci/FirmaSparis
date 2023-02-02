@@ -28,5 +28,18 @@ namespace FirmaSiparis.API.Controllers
                 return BadRequest("Sistem de hata meydana geldi");
             }
         }
+        [HttpGet("List")]
+        public IActionResult List()
+        {
+            try
+            {
+                List<Urun> urunler = _urunRepository.GetActives();
+                return Ok(urunler);
+            }
+            catch
+            {
+                return BadRequest("Sistem de hata meydana geldi");
+            }
+        }
     }
 }
