@@ -11,20 +11,23 @@ namespace FirmaSiparis.API.Controllers
     public class SiparisController : ControllerBase
     {
         SiparisRepository _siparisRepository;
+        FirmaRepository _firmaRepository;
         public SiparisController(AppDbContext context)
         {
             _siparisRepository = new SiparisRepository(context);
+            _firmaRepository= new FirmaRepository(context);
         }
         [HttpPost("Add")]
         public IActionResult Add(Siparis siparis)
         {
             try
             {
-                if (siparis.Firma != null)
+                if (siparis.FirmaId != Guid.Empty)
                 {
-                    if (siparis.Firma.OnayDurumu == true)
+                    Firma firma = _firmaRepository.GetById(siparis.FirmaId);
+                    if (firma.OnayDurumu == true)
                     {
-                        if (TimeSpan.Compare(TimeSpan.Parse("8:30"), siparis.Firma.SiparisIzinBasSaati) == -1 && TimeSpan.Compare(TimeSpan.Parse("11:00"), siparis.Firma.SiparisIzinBitisSaati) == 1)
+                        if (TimeSpan.Compare(TimeSpan.Parse("8:30"), firma.SiparisIzinBasSaati) == -1 && TimeSpan.Compare(TimeSpan.Parse("11:00"), firma.SiparisIzinBitisSaati) == 1)
                         {
                             _siparisRepository.Add(siparis);
                             return NoContent();
